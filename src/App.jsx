@@ -323,7 +323,7 @@ function App() {
                                 <>
                                   <span
                                     className="score-value"
-                                    style={isWinner ? { color: b.color } : {}}
+                                    style={isWinner ? { color: '#69f0ae' } : {}}
                                   >
                                     {r.pp512.toFixed(2)}
                                   </span>
@@ -334,8 +334,8 @@ function App() {
                                     <span
                                       className="winner-badge"
                                       style={{
-                                        background: b.color,
-                                        color: '#000',
+                                        background: '#69f0ae',
+                                        color: '#0a0a0f',
                                       }}
                                     >
                                       W
@@ -374,7 +374,7 @@ function App() {
                                 <>
                                   <span
                                     className="score-value"
-                                    style={isWinner ? { color: b.color } : {}}
+                                    style={isWinner ? { color: '#69f0ae' } : {}}
                                   >
                                     {r.tg128.toFixed(2)}
                                   </span>
@@ -385,8 +385,8 @@ function App() {
                                     <span
                                       className="winner-badge"
                                       style={{
-                                        background: b.color,
-                                        color: '#000',
+                                        background: '#69f0ae',
+                                        color: '#0a0a0f',
                                       }}
                                     >
                                       W
