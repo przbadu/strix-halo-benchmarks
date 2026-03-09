@@ -1,0 +1,99 @@
+{
+  "backends": [
+    {
+      "id": "rocm-7.2",
+      "name": "ROCm 7.2",
+      "shortName": "ROCm 7.2",
+      "os": "Fedora",
+      "kernel": "6.18.13-200.fc43.x86_64",
+      "color": "#ff5252"
+    },
+    {
+      "id": "vulkan-radv",
+      "name": "Vulkan (RADV)",
+      "shortName": "Vulkan RADV",
+      "os": "Proxmox (pve-manager/9.1.6)",
+      "kernel": "6.17.4-2-pve",
+      "color": "#448aff"
+    }
+  ],
+  "models": [
+    {
+      "name": "Qwen3.5-4B-UD-Q4_K_XL",
+      "file": "Qwen3.5-4B-UD-Q4_K_XL.gguf",
+      "size": "2.70 GiB",
+      "params": "4.21 B",
+      "ngl": 99,
+      "results": {
+        "rocm-7.2": { "pp512": 1407.83, "pp512_std": 6.01, "tg128": 44.63, "tg128_std": 0.94 },
+        "vulkan-radv": { "pp512": 1388.87, "pp512_std": 10.68, "tg128": 48.53, "tg128_std": 0.65 }
+      }
+    },
+    {
+      "name": "Qwen3.5-4B-UD-Q8_K_XL",
+      "file": "Qwen3.5-4B-UD-Q8_K_XL.gguf",
+      "size": "5.53 GiB",
+      "params": "4.21 B",
+      "ngl": 99,
+      "results": {
+        "rocm-7.2": { "pp512": 1384.80, "pp512_std": 54.06, "tg128": 28.18, "tg128_std": 0.04 },
+        "vulkan-radv": { "pp512": 1259.14, "pp512_std": 3.82, "tg128": 27.95, "tg128_std": 0.07 }
+      }
+    },
+    {
+      "name": "Qwen3.5-9B-UD-Q4_K_XL",
+      "file": "Qwen3.5-9B-UD-Q4_K_XL.gguf",
+      "size": "5.55 GiB",
+      "params": "8.95 B",
+      "ngl": 99,
+      "results": {
+        "rocm-7.2": { "pp512": 917.83, "pp512_std": 7.23, "tg128": 28.88, "tg128_std": 0.09 },
+        "vulkan-radv": { "pp512": 819.24, "pp512_std": 55.72, "tg128": 31.09, "tg128_std": 0.05 }
+      }
+    },
+    {
+      "name": "Qwen3.5-27B-UD-Q4_K_XL",
+      "file": "Qwen3.5-27B-UD-Q4_K_XL.gguf",
+      "size": "16.40 GiB",
+      "params": "26.90 B",
+      "ngl": 99,
+      "results": {
+        "rocm-7.2": { "pp512": 264.30, "pp512_std": 16.38, "tg128": 9.96, "tg128_std": 0.02 },
+        "vulkan-radv": { "pp512": 220.35, "pp512_std": 3.36, "tg128": 10.66, "tg128_std": 0.01 }
+      }
+    },
+    {
+      "name": "Qwen3.5-35B-A3B-UD-Q4_K_XL",
+      "file": "Qwen3.5-35B-A3B-UD-Q4_K_XL.gguf",
+      "size": "20.70 GiB",
+      "params": "34.66 B",
+      "ngl": 99,
+      "results": {
+        "rocm-7.2": { "pp512": 887.15, "pp512_std": 18.34, "tg128": 39.70, "tg128_std": 0.06 },
+        "vulkan-radv": { "pp512": 865.72, "pp512_std": 59.59, "tg128": 53.39, "tg128_std": 0.08 }
+      }
+    },
+    {
+      "name": "Qwen3.5-35B-A3B-UD-Q8_K_XL",
+      "file": "Qwen3.5-35B-A3B-UD-Q8_K_XL.gguf",
+      "size": "45.33 GiB",
+      "params": "34.66 B",
+      "ngl": 99,
+      "results": {
+        "rocm-7.2": { "pp512": 603.63, "pp512_std": 23.34, "tg128": 24.46, "tg128_std": 0.02 },
+        "vulkan-radv": { "pp512": 747.72, "pp512_std": 44.81, "tg128": 31.83, "tg128_std": 0.03 }
+      }
+    },
+    {
+      "name": "Qwen3.5-122B-A10B-UD-Q4_K_XL",
+      "file": "Qwen3.5-122B-A10B-UD-Q4_K_XL",
+      "size": "63.65 GiB",
+      "params": "122.11 B",
+      "ngl": 99,
+      "results": {
+        "rocm-7.2": { "pp512": 268.41, "pp512_std": 18.54, "tg128": 21.29, "tg128_std": 0.01 },
+        "vulkan-radv": { "pp512": 247.16, "pp512_std": 1.46, "tg128": 22.60, "tg128_std": 0.01 }
+      }
+    }
+  ]
+}
