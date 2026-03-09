@@ -120,7 +120,10 @@ function App() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                llama-bench on AMD Ryzen AI Max+ 395
+                llama-bench on AMD Ryzen AI Max+ 395 &middot; Models by{' '}
+                <a href="https://huggingface.co/unsloth" target="_blank" rel="noopener noreferrer">
+                  Unsloth
+                </a>
               </motion.p>
             </div>
             <motion.div

@@ -61,6 +61,16 @@
   text-transform: uppercase;
 }
 
+.header-subtitle a {
+  color: var(--accent-green);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.header-subtitle a:hover {
+  color: var(--text-primary);
+}
+
 .header-badge {
   display: inline-flex;
   align-items: center;
