@@ -19,6 +19,36 @@
   ],
   "models": [
     {
+      "name": "Qwen3.5-0.8B-UD-Q4_K_XL",
+      "file": "Qwen3.5-0.8B-UD-Q4_K_XL.gguf",
+      "size": "522.43 MiB",
+      "params": "0.75 B",
+      "ngl": 99,
+      "results": {
+        "vulkan-radv": { "pp512": 5731.77, "pp512_std": 32.89, "tg128": 178.22, "tg128_std": 4.27 }
+      }
+    },
+    {
+      "name": "Qwen3.5-0.8B-UD-Q8_K_XL",
+      "file": "Qwen3.5-0.8B-UD-Q8_K_XL.gguf",
+      "size": "1.09 GiB",
+      "params": "0.75 B",
+      "ngl": 99,
+      "results": {
+        "vulkan-radv": { "pp512": 5076.72, "pp512_std": 23.05, "tg128": 107.21, "tg128_std": 3.26 }
+      }
+    },
+    {
+      "name": "Qwen3.5-0.8B-BF16",
+      "file": "Qwen3.5-0.8B-BF16.gguf",
+      "size": "1.40 GiB",
+      "params": "0.75 B",
+      "ngl": 99,
+      "results": {
+        "vulkan-radv": { "pp512": 2856.64, "pp512_std": 158.56, "tg128": 85.45, "tg128_std": 1.88 }
+      }
+    },
+    {
       "name": "Qwen3.5-4B-UD-Q4_K_XL",
       "file": "Qwen3.5-4B-UD-Q4_K_XL.gguf",
       "size": "2.70 GiB",
