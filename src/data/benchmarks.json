@@ -124,6 +124,46 @@
         "rocm-7.2": { "pp512": 268.41, "pp512_std": 18.54, "tg128": 21.29, "tg128_std": 0.01 },
         "vulkan-radv": { "pp512": 247.16, "pp512_std": 1.46, "tg128": 22.60, "tg128_std": 0.01 }
       }
+    },
+    {
+      "name": "GLM-4.7-Flash-UD-Q4_K_XL",
+      "file": "GLM-4.7-Flash-UD-Q4_K_XL.gguf",
+      "size": "16.31 GiB",
+      "params": "29.94 B",
+      "ngl": 99,
+      "results": {
+        "vulkan-radv": { "pp512": 797.40, "pp512_std": 31.29, "tg128": 63.59, "tg128_std": 0.13 }
+      }
+    },
+    {
+      "name": "GLM-4.7-Flash-UD-Q8_K_XL",
+      "file": "GLM-4.7-Flash-UD-Q8_K_XL.gguf",
+      "size": "32.70 GiB",
+      "params": "29.94 B",
+      "ngl": 99,
+      "results": {
+        "vulkan-radv": { "pp512": 828.90, "pp512_std": 7.07, "tg128": 39.28, "tg128_std": 0.10 }
+      }
+    },
+    {
+      "name": "GPT-OSS-120B-UD-Q8_K_XL",
+      "file": "gpt-oss-120b-UD-Q8_K_XL.gguf",
+      "size": "60.03 GiB",
+      "params": "116.83 B",
+      "ngl": 99,
+      "results": {
+        "vulkan-radv": { "pp512": 443.29, "pp512_std": 2.99, "tg128": 42.13, "tg128_std": 0.06 }
+      }
+    },
+    {
+      "name": "Qwen3-Coder-Next-UD-Q4_K_XL",
+      "file": "Qwen3-Coder-Next-UD-Q4_K_XL.gguf",
+      "size": "45.49 GiB",
+      "params": "79.67 B",
+      "ngl": 99,
+      "results": {
+        "vulkan-radv": { "pp512": 421.43, "pp512_std": 2.45, "tg128": 40.08, "tg128_std": 1.98 }
+      }
     }
   ]
 }
