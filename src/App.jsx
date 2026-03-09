@@ -495,11 +495,11 @@ function App() {
         {/* Footer */}
         <footer className="footer">
           Strix Halo GPU Benchmarks &middot; llama-bench &middot;{' '}
-          <a
-            href="https://github.com/strix-halo-benchmark/strix-halo-benchmark.github.io"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://przbadu.dev" target="_blank" rel="noopener noreferrer">
+            przbadu.dev
+          </a>
+          {' '}&middot;{' '}
+          <a href="https://github.com/przbadu" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
         </footer>
