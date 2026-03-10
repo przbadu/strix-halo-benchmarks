@@ -158,6 +158,36 @@
   margin: 0 0.5rem;
 }
 
+.filter-chip--depth {
+  gap: 0;
+  padding: 0.4rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.filter-chip--depth.active {
+  background: var(--accent-purple);
+  border-color: var(--accent-purple);
+  color: #0a0a0f;
+  font-weight: 600;
+}
+
+.depth-note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-purple);
+  background: rgba(179, 136, 255, 0.08);
+  border: 1px solid rgba(179, 136, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.depth-note strong {
+  color: var(--text-primary);
+}
+
 .model-search {
   flex: 1;
   min-width: 200px;

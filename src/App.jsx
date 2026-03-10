@@ -3,6 +3,23 @@ import { motion, AnimatePresence } from 'motion/react'
 import benchmarkData from './data/benchmarks.json'
 import './App.css'
 
+const DEPTH_LABELS = {
+  default: 'Default',
+  '4096': '4K',
+  '8192': '8K',
+  '16384': '16K',
+  '32768': '32K',
+  '65536': '64K',
+  '131072': '128K',
+}
+
+function getModelResults(model, backendId, depth) {
+  if (depth === 'default') {
+    return model.results[backendId] ?? null
+  }
+  return model.depth_results?.[backendId]?.[depth] ?? null
+}
+
 function App() {
   const [selectedBackends, setSelectedBackends] = useState(
     benchmarkData.backends.map((b) => b.id)
@@ -10,6 +27,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('')
   const [chartMetric, setChartMetric] = useState('pp512')
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'desc' })
+  const [selectedDepth, setSelectedDepth] = useState('default')
 
   const toggleBackend = (id) => {
     setSelectedBackends((prev) => {
@@ -27,7 +45,9 @@ function App() {
 
   const filteredModels = useMemo(() => {
     let models = benchmarkData.models.filter((m) => {
-      const hasAnyResult = selectedBackends.some((bid) => m.results[bid])
+      const hasAnyResult = selectedBackends.some(
+        (bid) => getModelResults(m, bid, selectedDepth) != null
+      )
       const matchesSearch =
         !searchQuery ||
         m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -38,14 +58,16 @@ function App() {
     if (sortConfig.key) {
       models = [...models].sort((a, b) => {
         const { backendId, metric } = parseSortKey(sortConfig.key)
-        const aVal = a.results[backendId]?.[metric] ?? 0
-        const bVal = b.results[backendId]?.[metric] ?? 0
+        const aR = getModelResults(a, backendId, selectedDepth)
+        const bR = getModelResults(b, backendId, selectedDepth)
+        const aVal = aR?.[metric] ?? 0
+        const bVal = bR?.[metric] ?? 0
         return sortConfig.direction === 'asc' ? aVal - bVal : bVal - aVal
       })
     }
 
     return models
-  }, [selectedBackends, searchQuery, sortConfig])
+  }, [selectedBackends, searchQuery, sortConfig, selectedDepth])
 
   const parseSortKey = (key) => {
     const parts = key.split('__')
@@ -66,7 +88,8 @@ function App() {
     let bestId = null
     let bestVal = -1
     for (const b of activeBackends) {
-      const val = model.results[b.id]?.[metric]
+      const r = getModelResults(model, b.id, selectedDepth)
+      const val = r?.[metric]
       if (val != null && val > bestVal) {
         bestVal = val
         bestId = b.id
@@ -78,8 +101,10 @@ function App() {
   const getDelta = (model, metric) => {
     if (activeBackends.length !== 2) return null
     const [a, b] = activeBackends
-    const valA = model.results[a.id]?.[metric]
-    const valB = model.results[b.id]?.[metric]
+    const rA = getModelResults(model, a.id, selectedDepth)
+    const rB = getModelResults(model, b.id, selectedDepth)
+    const valA = rA?.[metric]
+    const valB = rB?.[metric]
     if (valA == null || valB == null) return null
     return valA - valB
   }
@@ -88,12 +113,13 @@ function App() {
     let max = 0
     for (const m of filteredModels) {
       for (const b of activeBackends) {
-        const val = m.results[b.id]?.[chartMetric] ?? 0
+        const r = getModelResults(m, b.id, selectedDepth)
+        const val = r?.[chartMetric] ?? 0
         if (val > max) max = val
       }
     }
     return max
-  }, [filteredModels, activeBackends, chartMetric])
+  }, [filteredModels, activeBackends, chartMetric, selectedDepth])
 
   const multiBackend = activeBackends.length > 1
 
@@ -205,6 +231,19 @@ function App() {
 
           <div className="filter-divider" />
 
+          <span className="filter-label">Context</span>
+          {benchmarkData.depths.map((d) => (
+            <button
+              key={d}
+              className={`filter-chip filter-chip--depth ${selectedDepth === d ? 'active' : ''}`}
+              onClick={() => setSelectedDepth(d)}
+            >
+              {DEPTH_LABELS[d] || d}
+            </button>
+          ))}
+
+          <div className="filter-divider" />
+
           <div className="model-search">
             <span className="search-icon">&gt;_</span>
             <input
@@ -215,6 +254,19 @@ function App() {
             />
           </div>
         </motion.div>
+
+        {/* Depth info note */}
+        {selectedDepth !== 'default' && (
+          <motion.div
+            className="depth-note"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+          >
+            Showing results at context depth <strong>{Number(selectedDepth).toLocaleString()}</strong> tokens.
+            Only models with depth benchmarks are shown.
+          </motion.div>
+        )}
 
         {/* Table */}
         <motion.div
@@ -315,7 +367,7 @@ function App() {
 
                         {/* pp512 scores */}
                         {activeBackends.map((b) => {
-                          const r = model.results[b.id]
+                          const r = getModelResults(model, b.id, selectedDepth)
                           const isWinner = multiBackend && ppWinner === b.id
                           return (
                             <td
@@ -366,7 +418,7 @@ function App() {
 
                         {/* tg128 scores */}
                         {activeBackends.map((b) => {
-                          const r = model.results[b.id]
+                          const r = getModelResults(model, b.id, selectedDepth)
                           const isWinner = multiBackend && tgWinner === b.id
                           return (
                             <td
@@ -431,7 +483,10 @@ function App() {
           transition={{ delay: 0.8, duration: 0.5 }}
         >
           <h2 className="section-title">Visual Comparison</h2>
-          <p className="section-subtitle">tokens per second across models</p>
+          <p className="section-subtitle">
+            tokens per second across models
+            {selectedDepth !== 'default' && ` @ ${Number(selectedDepth).toLocaleString()} context`}
+          </p>
 
           <div className="chart-toggle">
             <button
@@ -456,7 +511,8 @@ function App() {
                   <div key={model.name} className="bar-group">
                     <div className="bar-group-label">{model.name}</div>
                     {activeBackends.map((b) => {
-                      const val = model.results[b.id]?.[chartMetric] ?? 0
+                      const r = getModelResults(model, b.id, selectedDepth)
+                      const val = r?.[chartMetric] ?? 0
                       const pct = maxChartVal > 0 ? (val / maxChartVal) * 100 : 0
                       const isWinner = multiBackend && winner === b.id
                       return (
