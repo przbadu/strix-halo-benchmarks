@@ -26,7 +26,8 @@ function App() {
   )
   const [searchQuery, setSearchQuery] = useState('')
   const [chartMetric, setChartMetric] = useState('pp512')
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'desc' })
+  const defaultSortKey = `${benchmarkData.backends[0].id}__pp512`
+  const [sortConfig, setSortConfig] = useState({ key: defaultSortKey, direction: 'desc' })
   const [selectedDepth, setSelectedDepth] = useState('default')
 
   const toggleBackend = (id) => {
