@@ -43,6 +43,11 @@ function App() {
     selectedBackends.includes(b.id)
   )
 
+  const parseSortKey = (key) => {
+    const parts = key.split('__')
+    return { backendId: parts[0], metric: parts[1] }
+  }
+
   const filteredModels = useMemo(() => {
     let models = benchmarkData.models.filter((m) => {
       const hasAnyResult = selectedBackends.some(
@@ -68,11 +73,6 @@ function App() {
 
     return models
   }, [selectedBackends, searchQuery, sortConfig, selectedDepth])
-
-  const parseSortKey = (key) => {
-    const parts = key.split('__')
-    return { backendId: parts[0], metric: parts[1] }
-  }
 
   const handleSort = (key) => {
     setSortConfig((prev) => {
