@@ -1,4 +1,4 @@
-# llama-bench ROCm 7.2 on Strix Halo (Ryzen AI Max+ 395) — 14 models benchmarked
+# llama-bench ROCm 7.2 on Strix Halo (Ryzen AI Max+ 395) — Qwen 3.5 Model Family
 
 Running `llama-bench` with **ROCm 7.2** on AMD Ryzen AI Max+ 395 (Strix Halo) with 128GB unified memory.
 
